@@ -10,7 +10,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const statsRef = ref(db, 'bot_stats');
 
-// 2. دالة العداد الحركي
+// 2. دالة العداد الحركي الذكي
 function animateCount(elementId, targetValue, duration) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -21,7 +21,7 @@ function animateCount(elementId, targetValue, duration) {
         return;
     }
 
-    const stepTime = Math.abs(Math.floor(duration / (targetValue / (targetValue / 50))));
+    const stepTime = Math.max(1, Math.floor(duration / 50));
     const timer = setInterval(() => {
         startValue += Math.ceil(targetValue / 50);
         if (startValue >= targetValue) {
@@ -30,20 +30,17 @@ function animateCount(elementId, targetValue, duration) {
         } else {
             element.textContent = "+" + startValue.toLocaleString();
         }
-    }, stepTime > 0 ? stepTime : 20);
+    }, stepTime);
 }
 
-// 3. الاستماع الموحد للبيانات (يحدث العدادات والحالة معاً)
+// 3. الاستماع الموحد للبيانات
 onValue(statsRef, (snapshot) => {
     const data = snapshot.val();
     const statusCard = document.getElementById('status-card');
     const botStatus = document.getElementById('bot-status');
     const statusText = document.getElementById('status-text');
 
-    if (!data) {
-        console.log("⚠️ لم يتم العثور على بيانات.");
-        return;
-    }
+    if (!data) return;
 
     // تحديث العدادات
     animateCount('servers-count', data.servers || 0, 1500);
@@ -61,6 +58,4 @@ onValue(statsRef, (snapshot) => {
         statusCard.style.borderColor = "#ff4d4d";
         botStatus.style.color = "#ff4d4d";
     }
-    
-    console.log("📊 تم تحديث الحالة والعدادات:", data);
 });
