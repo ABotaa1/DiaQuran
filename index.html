@@ -54,6 +54,24 @@
         <div class="text-xs text-gray-500 uppercase tracking-widest">مستخدم مستفيد</div>
       </div>
     </div>
+
+    <div class="grid md:grid-cols-3 gap-6 px-6">
+      <div class="card-luxury p-8 rounded-3xl text-right">
+        <div class="text-gold text-3xl mb-4">📜</div>
+        <h3 class="text-xl font-bold mb-2">سهولة تامة</h3>
+        <p class="text-sm text-gray-500">تحكم كامل ببضع نقرات عبر واجهة أوامر بسيطة.</p>
+      </div>
+      <div class="card-luxury p-8 rounded-3xl text-right">
+        <div class="text-gold text-3xl mb-4">🕯️</div>
+        <h3 class="text-xl font-bold mb-2">أذكار تلقائية</h3>
+        <p class="text-sm text-gray-500">نظام ذكي ينشر الطمأنينة في سيرفرك بشكل دوري.</p>
+      </div>
+      <div class="card-luxury p-8 rounded-3xl text-right">
+        <div class="text-gold text-3xl mb-4">🕋</div>
+        <h3 class="text-xl font-bold mb-2">تلاوات خاشعة</h3>
+        <p class="text-sm text-gray-500">استمتع بأصوات أعذب القراء في غرفتك الصوتية.</p>
+      </div>
+    </div>
   </main>
 
   <script type="module">
@@ -63,23 +81,16 @@
     const firebaseConfig = { databaseURL: "https://diaqurann-default-rtdb.firebaseio.com/" };
     const db = getDatabase(initializeApp(firebaseConfig));
 
-    // دالة محسنة للعد التصاعدي تبدأ من 0 لكل عنصر
     function animateCounter(id, target) {
       const element = document.getElementById(id);
-      const duration = 2000; // 2 ثانية
-      const start = 0;
+      const duration = 2000;
       const startTime = performance.now();
-
       function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const current = Math.floor(progress * target);
-        
         element.innerText = current.toLocaleString() + '+';
-        
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        }
+        if (progress < 1) requestAnimationFrame(update);
       }
       requestAnimationFrame(update);
     }
@@ -87,13 +98,10 @@
     onValue(ref(db, 'bot_stats'), (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        // تشغيل الأنيميشن لكل عداد
         animateCounter('serverCount', data.servers);
         animateCounter('userCount', data.users);
-        
         const statusIndicator = document.getElementById('statusIndicator');
         const statusText = document.getElementById('statusText');
-        
         if (data.status === 'online') {
           statusText.innerText = 'يعمل';
           statusText.className = 'text-sm font-bold text-green-500';
