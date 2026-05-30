@@ -31,6 +31,28 @@ const firebaseConfig = {
     databaseURL: "https://diaqurann-default-rtdb.firebaseio.com"
 };
 
+import { get, ref as dbRef, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+// الاستماع لتغيرات الحالة
+onValue(statsRef, (snapshot) => {
+    const data = snapshot.val();
+    const statusCard = document.getElementById('status-card');
+    const botStatus = document.getElementById('bot-status');
+    const statusText = document.getElementById('status-text');
+
+    if (data && data.status === "online") {
+        botStatus.textContent = "24/7";
+        statusText.textContent = "البوت يعمل الآن";
+        statusCard.style.borderColor = "var(--accent-color)"; // حدود تركواز للبوت الشغال
+    } else {
+        botStatus.textContent = "OFF";
+        statusText.textContent = "البوت متوقف حالياً";
+        statusCard.style.borderColor = "#ff4d4d"; // حدود حمراء للبوت المتوقف
+        botStatus.style.color = "#ff4d4d";
+    }
+});
+
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const statsRef = ref(db, 'bot_stats');
