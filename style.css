@@ -1,11 +1,12 @@
 :root {
-    --bg-dark: #090d16;
-    --card-bg: rgba(30, 41, 59, 0.45);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --primary-color: #1A5F7A;
-    --accent-color: #57C5B6;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
+    /* تم تعديل الألوان هنا لتصبح سوداء ملكية داكنة وفخمة جداً */
+    --bg-dark: #05070c;           /* أسود داكن عميق جداً */
+    --card-bg: rgba(13, 17, 26, 0.7); /* كروت داكنة مدمجة مع الخلفية بامتياز */
+    --border-color: rgba(255, 255, 255, 0.04); /* حدود ناعمة جداً وغير مزعجة */
+    --primary-color: #164B60;     /* أزرق داكن متناسق مع الثيم الجديد */
+    --accent-color: #4fc0b0;      /* لون التركواز المضيء المريح للعين */
+    --text-main: #f8fafc;         /* النص الأساسي أبيض ناصع */
+    --text-muted: #8a99ad;       /* النص الفرعي رمادي ناعم */
 }
 
 * {
@@ -26,23 +27,12 @@ body {
     overflow-x: hidden;
 }
 
-body {
-    background-color: #0d0e12; /* اللون القريب من الأسود */
-    color: #ffffff;            /* عشان الكلام يقلب أبيض ويكون واضح */
-}
-
-/* إذا عندك كروت الإحصائيات أو الميزات تبيها تبرز بشكل خفيف */
-.card, .stat-box { 
-    background-color: #1a1c23; /* أفتح تكّة من الخلفية عشان تعطي أبعاد */
-    border: 1px solid #242731; /* حدود خفيفة جداً تزيد الفخامة */
-}
-
-/* توهج بالخلفية متحرك */
+/* توهج بالخلفية متحرك متناسق مع الثيم الأسود */
 .bg-glow {
     position: fixed;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(87, 197, 182, 0.1) 0%, rgba(26, 95, 122, 0.05) 50%, transparent 100%);
+    background: radial-gradient(circle, rgba(79, 192, 176, 0.07) 0%, rgba(22, 75, 96, 0.03) 50%, transparent 100%);
     top: -100px;
     left: -100px;
     z-index: 1;
@@ -81,7 +71,7 @@ header h1 {
     margin: 0;
     font-weight: 800;
     letter-spacing: 1px;
-    background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, #fff 30%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -121,40 +111,42 @@ header h1 {
 .btn-primary:hover {
     background-color: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(87, 197, 182, 0.3);
+    box-shadow: 0 8px 25px rgba(79, 192, 176, 0.2);
 }
 
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
     color: var(--text-main);
     border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.07);
     transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .stats-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px; /* تكبير المسافة بين البطاقات شوي */
+    gap: 25px; 
     margin-bottom: 60px;
 }
 
 .stat-card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    padding: 30px 20px; /* ضبط المسافات الداخلية */
+    padding: 30px 20px; 
     border-radius: 16px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
-/* تأثير خفيف عند تمرير الماوس على بطاقات الإحصائيات */
+/* تأثير فخم عند تمرير الماوس */
 .stat-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(87, 197, 182, 0.2);
+    border-color: rgba(79, 192, 176, 0.25);
+    background: rgba(19, 25, 38, 0.9);
 }
 
 .stat-card h3 {
@@ -162,7 +154,6 @@ header h1 {
     margin: 0 0 8px 0;
     color: var(--accent-color);
     font-weight: 700;
-    /* تحجيم اتجاه النص للأرقام عشان تظهر الـ + في مكانها الصحيح */
     direction: ltr; 
     display: inline-block;
 }
@@ -189,7 +180,7 @@ header h1 {
 
 .feature-card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
     padding: 30px 20px;
     border-radius: 16px;
@@ -200,13 +191,14 @@ header h1 {
 .feature-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-color);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: rgba(19, 25, 38, 0.9);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .icon-box {
     width: 50px;
     height: 50px;
-    background: rgba(87, 197, 182, 0.1);
+    background: rgba(79, 192, 176, 0.08);
     color: var(--accent-color);
     display: flex;
     align-items: center;
@@ -229,7 +221,7 @@ header h1 {
 }
 
 code {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
     padding: 2px 6px;
     border-radius: 4px;
     color: var(--accent-color);
@@ -238,7 +230,7 @@ code {
 
 footer {
     margin-top: 60px;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.2);
     font-size: 13px;
 }
 
