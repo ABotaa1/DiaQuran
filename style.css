@@ -9,6 +9,12 @@
     --text-muted: #8a99ad;       /* النص الفرعي رمادي ناعم */
 }
 
+/* تفعيل النزول الانسيابي الناعم للمميزات على كامل الصفحة */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px; /* تترك مسافة مريحة فوق القسم بعد النزول */
+}
+
 * {
     box-shadow: none;
     box-sizing: border-box;
@@ -114,16 +120,18 @@ header h1 {
     box-shadow: 0 8px 25px rgba(79, 192, 176, 0.2);
 }
 
+/* تعديل ستايل زر استكشف الميزات ليتناسق مع تركواز الهوية */
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.02);
     color: var(--text-main);
     border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: rgba(79, 192, 176, 0.05); /* خلفية تركواز خفيفة وفخمة */
+    border-color: var(--accent-color); /* تلوين الحواف بالتركواز عند الهوڤر */
+    color: var(--accent-color);
     transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .stats-container {
