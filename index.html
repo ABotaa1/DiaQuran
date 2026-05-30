@@ -37,7 +37,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24 mb-24 max-w-3xl mx-auto">
       <div class="card-luxury p-6 rounded-2xl">
-        <div id="serverCount" class="text-3xl font-black text-gold mb-1">0+</div>
+        <div id="serverCount" class="text-3xl font-black text-gold mb-1">0</div>
         <div class="text-xs text-gray-500 uppercase tracking-widest">خادم نشط</div>
       </div>
 
@@ -50,7 +50,7 @@
       </div>
       
       <div class="card-luxury p-6 rounded-2xl">
-        <div id="userCount" class="text-3xl font-black text-gold mb-1">0+</div>
+        <div id="userCount" class="text-3xl font-black text-gold mb-1">0</div>
         <div class="text-xs text-gray-500 uppercase tracking-widest">مستخدم مستفيد</div>
       </div>
     </div>
@@ -85,11 +85,29 @@
     const firebaseConfig = { databaseURL: "https://diaqurann-default-rtdb.firebaseio.com/" };
     const db = getDatabase(initializeApp(firebaseConfig));
 
+    // دالة الأنيميشن
+    function animateCounter(id, target) {
+      let current = 0;
+      const duration = 2000; 
+      const increment = Math.ceil(target / (duration / 40));
+      const element = document.getElementById(id);
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.innerText = target.toLocaleString() + '+';
+          clearInterval(timer);
+        } else {
+          element.innerText = current.toLocaleString();
+        }
+      }, 40);
+    }
+
     onValue(ref(db, 'bot_stats'), (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        document.getElementById('serverCount').innerText = data.servers.toLocaleString() + '+';
-        document.getElementById('userCount').innerText = data.users.toLocaleString() + '+';
+        animateCounter('serverCount', data.servers);
+        animateCounter('userCount', data.users);
         
         const statusIndicator = document.getElementById('statusIndicator');
         const statusText = document.getElementById('statusText');
