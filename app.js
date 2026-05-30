@@ -10,7 +10,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const statsRef = ref(db, 'bot_stats');
 
-// 2. دالة العداد الحركي الذكي
+// 2. دالة العداد الحركي
 function animateCount(elementId, targetValue, duration) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -33,29 +33,14 @@ function animateCount(elementId, targetValue, duration) {
     }, stepTime);
 }
 
-// 3. الاستماع الموحد للبيانات
+// 3. الاستماع للبيانات (تحديث العدادات فقط)
 onValue(statsRef, (snapshot) => {
     const data = snapshot.val();
-    const statusCard = document.getElementById('status-card');
-    const botStatus = document.getElementById('bot-status');
-    const statusText = document.getElementById('status-text');
-
     if (!data) return;
 
-    // تحديث العدادات
+    // تحديث العدادات فقط
     animateCount('servers-count', data.servers || 0, 1500);
     animateCount('users-count', data.users || 0, 1500);
-
-    // تحديث الحالة (الحل الجذري لمشكلة "جاري التحقق")
-    if (data.status === "online") {
-        botStatus.textContent = "24/7";
-        statusText.textContent = "يعمل الآن";
-        statusCard.style.borderColor = "#4fc0b0";
-        botStatus.style.color = "#4fc0b0";
-    } else {
-        botStatus.textContent = "OFF";
-        statusText.textContent = "البوت متوقف حالياً";
-        statusCard.style.borderColor = "#ff4d4d";
-        botStatus.style.color = "#ff4d4d";
-    }
+    
+    console.log("📊 تم تحديث العدادات بنجاح.");
 });
