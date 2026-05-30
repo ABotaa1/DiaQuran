@@ -12,7 +12,7 @@
 /* تفعيل النزول الانسيابي الناعم للمميزات على كامل الصفحة */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 20px; /* تترك مسافة مريحة فوق القسم بعد النزول */
+    scroll-padding-top: 40px; /* تترك مسافة مريحة وفخمة فوق القسم بعد النزول */
 }
 
 * {
@@ -27,8 +27,8 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* ترتيب العناصر بشكل عمودي لأسفل تلقائياً */
+    align-items: center; /* توسيط محاذاة العناصر في المنتصف */
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -50,7 +50,7 @@ body {
     z-index: 2;
     max-width: 900px;
     width: 100%;
-    padding: 40px 20px;
+    padding: 60px 20px; /* زيادة مسافة الهوامش لراحة العين بالتصفح */
     text-align: center;
 }
 
